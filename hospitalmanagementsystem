@@ -1,0 +1,188 @@
+#include<stdio.h>
+#include<dos.h>
+#define DOCTORCOUNT 10
+#define PATIENTCOUNT 100
+struct doctor 
+{
+    char name[50];
+    char specialization[50];
+    int experience;
+};
+struct patient
+{
+    char name[50];
+    int age;
+    char disease[100];
+    int totaltestcount;
+    int staycost;
+    int staydays;
+};
+struct appointment
+{
+    struct patient p1;
+    char doctorname[50];
+    int appointmentdate;
+};
+struct test
+{
+    char testname[50];
+    int cost;
+    int consultationfee;
+    int stayfee;
+};
+struct  doctor d1;
+struct patient p1;
+struct appointment a1;
+struct test t1;
+/*int doctorcount=0;
+int patientcount=0;
+int appointmentcount=0;*/
+void adddoctor()
+{
+   printf("enter doctor name:\n");
+   scanf("%s",&d1.name);
+   printf("enter specialization:\n");
+   scanf("%s",&d1.specialization);
+   printf("enter doctor experience:\n");
+   scanf("%d",&d1.experience);
+   printf("doctor added successfully\n");
+}
+void viewdoctor()
+{
+    printf("doctors list:\n");
+    printf("%s|specialization:%s|experience:%d\n",d1.name,d1.specialization,d1.experience);
+}
+void addpatient()
+{
+    printf("enter patient name:\n");
+    scanf("%s",&p1.name);
+    printf("enter age:\n");
+    scanf("%d",&p1.age);
+    printf("enter disease:\n");
+    scanf("%s",&p1.disease);
+    printf("patient added successfully\n");
+}
+void viewpatient()
+{
+    printf("patientlist:\n");
+    printf("%s|age:%d|disease:%s",p1.name,p1.age,p1.disease);
+}
+void scheduleappointment()
+{
+    // printf("enter patientname:\n");
+    // scanf("%s",p1.name);
+    printf("enter appointment date:\n");
+    scanf("%d",&a1.appointmentdate);
+    printf("Available doctor:\n");
+    printf("%s|specialization:%s|experience:%d\n",d1.name,d1.specialization,d1.experience);
+    printf("assign doctor:%s\n",d1.name);
+    printf("appointment scheduled successfully\n");
+
+}
+void viewappointments()
+{
+    printf("scheduled appointments:\n");
+    printf("patient:%s|doctor:%s|date:%d",p1.name,d1.name,a1.appointmentdate);
+}
+void assigntests()
+{
+    printf("enter patient name:%s",p1.name);
+    printf("available tests:\n");
+    printf("1.blood test:700\n 2.x-ray:600\n 3.typhoidtest:800\n");
+    int n;
+    printf("enter number of test:\n");
+    scanf("%d",&n);
+    for(int i=0;i<n;i++){
+    int testnumber;
+    printf("enter testnumber:\n");
+    scanf("%d",&testnumber);
+    switch(testnumber)
+    {
+        case 1:printf("test assigned:bloodtest\n");
+               break;
+        case 2:printf("test assigned:x-ray\n");
+               break;
+        case 3:printf("testassigned:typhoiddtest\n");
+               break;
+        default:printf("default");
+                break;
+    }
+    }
+
+}
+void generatebill()
+{
+    int n,totalbill=0;
+    printf("enter patient name for billing:%s",p1.name);
+    printf("enter number of days for hospital:\n");
+    scanf("%d",&n);
+    printf("final bill for %s:\n",p1.name);
+    printf("consultation fee:\n");
+    scanf("%d",&t1.consultationfee);
+    printf("tests cost:\n");
+    scanf("%d",&t1.cost);
+    printf("hospital stay charges:\n");
+    scanf("%d",&t1.stayfee);
+    totalbill=t1.consultationfee+t1.cost+t1.stayfee;
+    printf("total bill:%d",totalbill);
+}
+
+int main()
+{
+    int choice,l;
+    do
+    {
+      printf("welcome to the hospital manage system\n");
+      printf("please choose an option\n");
+      printf("1.basic doctor record system\n 2.basic patient record system\n 3.appointment scheduling and doctor assignment\n 4.test management\n 5.full billing and services\n 6.exit\n");
+      scanf("%d",&l);
+      switch(l)
+      {
+        case 1:printf("1.manage doctors 2.view doctors\n enter choice:\n" );
+               scanf("%d",&l);
+               if(l==1)
+               {
+                adddoctor();
+               }
+               else
+               {
+                viewdoctor();
+               }
+               break;
+        case 2:printf("1.manage patients 2.view patients\n enter choice:\n" );
+               scanf("%d",&l);
+               if(l==1)
+               {
+                addpatient();
+               }
+               else
+               {
+                viewpatient();
+               }
+               break;
+
+        case 3:printf("1.schedule appointement 2.view appointment\n enter choice:\n");
+            //    scanf("%d",&l);
+               scanf("%d",&l);
+               if(l==1)
+               {
+                scheduleappointment();
+               }
+               else
+               {
+                viewappointments();
+               }
+               break;
+        case 4:printf("assign tests:");
+               assigntests();
+               break;
+        case 5:printf("generate bill:");
+               generatebill();
+               break;
+        default:printf("invalid\n");
+        
+      }
+    }while(choice!=5);
+    return 0;
+    
+}
